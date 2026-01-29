@@ -27,8 +27,9 @@ export default async function createServer(fastify: FastifyInstance) {
     // Log SQLite errors
     if (error.message && error.message.includes("SQLite")) {
       console.error("Database error:", error);
+    } else {
+      console.error("Error:", error);
     }
-
     reply.status(500).send({
       error: "Internal Server Error",
       requestId: request.id,
