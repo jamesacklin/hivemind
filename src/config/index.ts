@@ -1,6 +1,6 @@
 import { Static, Type } from "@sinclair/typebox";
 import envSchema from "env-schema";
-import * as path from "node:path";
+import path from "node:path";
 
 enum NodeEnv {
   development = "development",
@@ -23,6 +23,7 @@ const schema = Type.Object({
   PORT: Type.Number({ default: 3000 }),
   FABRIC_URL: Type.String(),
   FABRIC_API_KEY: Type.String(),
+  DATA_DIR: Type.String({ default: "/data/" }),
 });
 
 const envFileSuffix = (env?: string) => {
@@ -70,4 +71,5 @@ export default {
     url: env.FABRIC_URL,
     apiKey: env.FABRIC_API_KEY,
   },
+  dataDir: env.DATA_DIR,
 };

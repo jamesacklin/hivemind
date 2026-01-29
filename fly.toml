@@ -7,6 +7,7 @@ LOG_LEVEL='info'
 HOST = '0.0.0.0'
 API_HOST='hivemind.fly.dev'
 NODE_ENV = 'production'
+DATA_DIR = '/data/'
 
 [processes]
 api = 'pnpm run start'
@@ -28,3 +29,7 @@ path = '/'
 [[vm]]
 size = 'performance-2x'
 processes = ['api']
+
+[mounts]
+source = 'hivemind_sqlite3'
+destination = '/data/'

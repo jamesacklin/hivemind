@@ -3,9 +3,10 @@
  */
 
 import { DatabaseSync } from 'node:sqlite';
-import { join } from 'node:path';
+import path from 'node:path';
 import { mkdirSync } from 'node:fs';
 import { runMigrations } from './schema.js';
+import config from '@/config/index.js';
 
 let db: DatabaseSync | null = null;
 
@@ -18,11 +19,11 @@ export function getDatabase(): DatabaseSync {
   }
 
   // Ensure data directory exists
-  const dataDir = join(process.cwd(), 'data');
+  const dataDir = config.dataDir;
   mkdirSync(dataDir, { recursive: true });
 
   // Create database connection
-  const dbPath = join(dataDir, 'fab-agent.db');
+  const dbPath = path.join(dataDir, 'fab-agent.db');
   db = new DatabaseSync(dbPath);
 
   // Enable foreign keys
