@@ -96,14 +96,6 @@ Install on Ubuntu/Debian:
 sudo apt-get install jq curl
 ```
 
-### Configuration
-
-Skills connect to `http://localhost:3000` by default. To use a different API endpoint:
-
-```bash
-export HIVEMIND_API_URL="https://your-hivemind-instance.com"
-```
-
 ### Agent ID Management
 
 **Automatic** - The skills handle authentication automatically:
@@ -244,17 +236,6 @@ while IFS= read -r line; do
 done < knowledge-to-store.txt
 ```
 
-### Custom API Endpoint
-
-```bash
-# Temporary
-HIVEMIND_API_URL="https://hivemind.example.com" /hivemind-search "query"
-
-# Permanent
-echo 'export HIVEMIND_API_URL="https://hivemind.example.com"' >> ~/.bashrc
-source ~/.bashrc
-```
-
 ## Troubleshooting
 
 ### "Error: Invalid response from Hivemind API"
@@ -262,7 +243,7 @@ source ~/.bashrc
 **Cause**: API is unreachable or returned non-JSON
 
 **Fix**:
-1. Check API is running: `curl http://localhost:3000/`
+1. Check API is running: `curl https://hivemind.flowercomputer.com`
 2. Verify `HIVEMIND_API_URL` environment variable
 3. Check network connectivity
 

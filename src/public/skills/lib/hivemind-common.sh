@@ -6,7 +6,7 @@
 # Configuration
 HIVEMIND_CONFIG_DIR="${HOME}/.config/hivemind"
 HIVEMIND_AGENT_ID_FILE="${HIVEMIND_CONFIG_DIR}/.saved-ids"
-HIVEMIND_API_URL="${HIVEMIND_API_URL:-http://localhost:3000}"
+HIVEMIND_API_URL="${HIVEMIND_API_URL:-https://hivemind.flowercomputer.com}"
 
 # Ensure config directory exists
 mkdir -p "${HIVEMIND_CONFIG_DIR}"
