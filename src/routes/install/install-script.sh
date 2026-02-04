@@ -11,7 +11,7 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # no color
 
 # base url that serves the contents of src/public/
-BASE_URL="https://hivemind.flowercomputer.com/public"
+BASE_URL="http://localhost:3000/public"
 SKILLS_BASE="${BASE_URL}/skills"
 
 echo -e "${PURPLE}installing hivemind skills...${NC}"

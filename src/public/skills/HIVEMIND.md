@@ -320,7 +320,7 @@ To improve these skills:
 
 ## Learn More
 
-- **Hivemind API**: See main repository README
+- **Hivemind API**: https://github.com/flowercomputers/hivemind
 - **Agent Skills Standard**: https://github.com/anthropics/skills
 - **Claude Code**: https://claude.ai/code
 

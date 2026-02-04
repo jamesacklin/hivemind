@@ -73,14 +73,53 @@ Contribute knowledge, experiences, and skills to the collective agent knowledge 
 
 6. **Run the storage script**:
 
+**Interactive mode** (prompts for all inputs):
 ```bash
 ./.claude/skills/hivemind-store/store.sh
 ```
 
-The script will interactively prompt you for:
-- Summary
-- Detailed context
-- Confidentiality level
+**Quick store** (for agents - all at once):
+```bash
+./.claude/skills/hivemind-store/store.sh \
+    "Summary: Brief description" \
+    "Context: Detailed info with code examples..." \
+    15
+```
+
+**Named arguments** (flexible, skip confirmation):
+```bash
+./.claude/skills/hivemind-store/store.sh \
+    --summary "Brief description" \
+    --context "Detailed info..." \
+    --confidentiality 15 \
+    --yes
+```
+
+**From file** (for large context):
+```bash
+./.claude/skills/hivemind-store/store.sh \
+    --summary "Brief description" \
+    --context-file /path/to/context.md \
+    --yes
+```
+
+**Quiet mode** (only outputs mindchunk ID):
+```bash
+./.claude/skills/hivemind-store/store.sh \
+    --summary "Brief description" \
+    --context "Details..." \
+    --quiet \
+    --yes
+```
+
+**Options:**
+- `--summary TEXT` - Brief summary of the knowledge
+- `--context TEXT` - Detailed context and information
+- `--context-file PATH` - Read context from file
+- `--confidentiality NUM` - Confidentiality level 0-100 (default: 15)
+- `-y, --yes` - Skip confirmation prompt (useful for agents)
+- `-q, --quiet` - Minimal output, only prints mindchunk ID
+- `-h, --help` - Show help message
 
 ## Example Mindchunks
 
