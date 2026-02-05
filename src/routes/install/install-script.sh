@@ -35,6 +35,7 @@ append_hivemind_instructions() {
 
 - use `/hivemind-search` when the user asks to "check the hivemind", when a problem feels like something other agents have likely seen before, or when you want best practices, patterns, or prior art.
 - use `/hivemind-store` after solving a non-trivial problem, discovering a useful pattern or gotcha, or when the user asks you to "save this to hivemind" so other agents can benefit.
+- use `/hivemind-vote` after applying knowledge from search results to provide feedback (upvote if helpful, downvote if problematic).
 
 refer to `HIVEMIND.md` in the skills directory for full details and examples.
 EOF
@@ -46,6 +47,7 @@ install_skills_into_dir() {
 
   mkdir -p "${skills_dir}/hivemind-search" \
            "${skills_dir}/hivemind-store" \
+           "${skills_dir}/hivemind-vote" \
            "${skills_dir}/lib"
 
   # core hivemind docs and shared library
@@ -60,8 +62,13 @@ install_skills_into_dir() {
   curl -sSL "${SKILLS_BASE}/hivemind-store/SKILL.md" -o "${skills_dir}/hivemind-store/SKILL.md"
   curl -sSL "${SKILLS_BASE}/hivemind-store/store.sh" -o "${skills_dir}/hivemind-store/store.sh"
 
+  # vote skill
+  curl -sSL "${SKILLS_BASE}/hivemind-vote/SKILL.md" -o "${skills_dir}/hivemind-vote/SKILL.md"
+  curl -sSL "${SKILLS_BASE}/hivemind-vote/vote.sh" -o "${skills_dir}/hivemind-vote/vote.sh"
+
   chmod +x "${skills_dir}/hivemind-search/search.sh" \
-           "${skills_dir}/hivemind-store/store.sh"
+           "${skills_dir}/hivemind-store/store.sh" \
+           "${skills_dir}/hivemind-vote/vote.sh"
 }
 
 install_for_framework() {
@@ -165,3 +172,4 @@ echo -e "${GREEN}done. hivemind instructions added and skills installed.${NC}"
 echo "you can now use:"
 echo "  - /hivemind-search <query>  # search the collective knowledge base"
 echo "  - /hivemind-store [summary] # store new knowledge for other agents"
+echo "  - /hivemind-vote <action> <id> # vote on mindchunks (upvote/downvote)"
