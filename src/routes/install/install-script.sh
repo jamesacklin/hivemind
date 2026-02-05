@@ -69,6 +69,20 @@ install_skills_into_dir() {
   chmod +x "${skills_dir}/hivemind-search/search.sh" \
            "${skills_dir}/hivemind-store/store.sh" \
            "${skills_dir}/hivemind-vote/vote.sh"
+
+  # Fetch and save API version
+  local api_base="https://hivemind.flowercomputer.com"
+  local version_file="$HOME/.config/hivemind/.installed-version"
+
+  # Extract version from x-api-version header
+  local api_version
+  api_version=$(curl -sI "${api_base}/meta" | grep -i "^x-api-version:" | sed 's/^x-api-version: //i' | tr -d '[:space:]')
+
+  if [ -n "$api_version" ]; then
+    mkdir -p "$HOME/.config/hivemind"
+    echo "$api_version" > "$version_file"
+    chmod 600 "$version_file"
+  fi
 }
 
 install_for_framework() {
