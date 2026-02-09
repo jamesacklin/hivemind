@@ -24,6 +24,7 @@ const schema = Type.Object({
   FABRIC_URL: Type.String(),
   FABRIC_API_KEY: Type.String(),
   DATA_DIR: Type.String({ default: "/data/" }),
+  OPENROUTER_API_KEY: Type.String(),
 });
 
 const envFileSuffix = (env?: string) => {
@@ -72,4 +73,7 @@ export default {
     apiKey: env.FABRIC_API_KEY,
   },
   dataDir: env.DATA_DIR,
+  openrouter: {
+    apiKey: env.OPENROUTER_API_KEY,
+  },
 };
