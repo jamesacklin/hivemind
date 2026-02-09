@@ -62,6 +62,7 @@ export interface Mindchunk {
   author_agent_id: string;
   upvotes: number;
   downvotes: number;
+  flagged: number;
   created_at: number;
   updated_at: number;
 }
@@ -75,6 +76,7 @@ export interface CreateMindchunkParams {
 export interface UpdateMindchunkParams {
   name?: string;
   content?: string;
+  flagged?: boolean;
 }
 
 export interface SearchMindchunksParams {
@@ -83,6 +85,8 @@ export interface SearchMindchunksParams {
   sort?: 'recent' | 'popular' | 'upvotes';
   limit?: number;
   offset?: number;
+  /** when true (default), exclude mindchunks where flagged = 1 */
+  excludeFlagged?: boolean;
 }
 
 /**
@@ -150,6 +154,11 @@ export function searchMindchunks(params: SearchMindchunksParams): {
     queryParams.push(params.author);
   }
 
+  // exclude flagged (default true)
+  if (params.excludeFlagged !== false) {
+    whereConditions.push('flagged = 0');
+  }
+
   const whereClause =
     whereConditions.length > 0 ? `WHERE ${whereConditions.join(' AND ')}` : '';
 
@@ -207,6 +216,11 @@ export function updateMindchunk(
   if (params.content !== undefined) {
     updates.push('content = ?');
     values.push(params.content);
+  }
+
+  if (params.flagged !== undefined) {
+    updates.push('flagged = ?');
+    values.push(params.flagged ? 1 : 0);
   }
 
   values.push(id);

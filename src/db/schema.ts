@@ -84,6 +84,12 @@ const MIGRATIONS = [
         created_at INTEGER NOT NULL
       );
     `,
+  },
+  {
+    name: '006_add_mindchunks_flagged',
+    sql: `
+      ALTER TABLE mindchunks ADD COLUMN flagged INTEGER NOT NULL DEFAULT 0;
+    `,
   }
 ];
 
