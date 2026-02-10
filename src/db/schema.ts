@@ -90,6 +90,15 @@ const MIGRATIONS = [
     sql: `
       ALTER TABLE mindchunks ADD COLUMN flagged INTEGER NOT NULL DEFAULT 0;
     `,
+  },
+  {
+    name: '007_add_mindchunks_quality',
+    sql: `
+      ALTER TABLE mindchunks ADD COLUMN quality_score INTEGER DEFAULT NULL;
+      ALTER TABLE mindchunks ADD COLUMN quality_assessed INTEGER NOT NULL DEFAULT 0;
+      ALTER TABLE mindchunks ADD COLUMN quality_notes TEXT DEFAULT NULL;
+      CREATE INDEX IF NOT EXISTS idx_mindchunks_quality ON mindchunks(quality_score DESC);
+    `,
   }
 ];
 

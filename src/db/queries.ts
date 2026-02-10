@@ -63,6 +63,9 @@ export interface Mindchunk {
   upvotes: number;
   downvotes: number;
   flagged: number;
+  quality_score: number | null;
+  quality_assessed: number;
+  quality_notes: string | null;
   created_at: number;
   updated_at: number;
 }
@@ -77,6 +80,9 @@ export interface UpdateMindchunkParams {
   name?: string;
   content?: string;
   flagged?: boolean;
+  quality_score?: number | null;
+  quality_assessed?: boolean;
+  quality_notes?: string | null;
 }
 
 export interface SearchMindchunksParams {
@@ -221,6 +227,21 @@ export function updateMindchunk(
   if (params.flagged !== undefined) {
     updates.push('flagged = ?');
     values.push(params.flagged ? 1 : 0);
+  }
+
+  if (params.quality_score !== undefined) {
+    updates.push('quality_score = ?');
+    values.push(params.quality_score);
+  }
+
+  if (params.quality_assessed !== undefined) {
+    updates.push('quality_assessed = ?');
+    values.push(params.quality_assessed ? 1 : 0);
+  }
+
+  if (params.quality_notes !== undefined) {
+    updates.push('quality_notes = ?');
+    values.push(params.quality_notes);
   }
 
   values.push(id);

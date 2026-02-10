@@ -13,6 +13,8 @@ export const searchSchema = {
         author: Type.Optional(Type.String()),
         upvotes: Type.Optional(Type.Number()),
         downvotes: Type.Optional(Type.Number()),
+        quality_score: Type.Optional(Type.Union([Type.Number(), Type.Null()])),
+        quality_assessed: Type.Optional(Type.Number()),
         created_at: Type.Optional(Type.Number()),
       })),
     }),

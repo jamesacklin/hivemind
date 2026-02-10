@@ -3,6 +3,7 @@ import { CreateSchema } from "./create.schema";
 import { createMindchunk } from "@/db/queries";
 import { sendMindchunkToFabric } from "@/fabric";
 import { checkForMalware } from "@/lib/check-for-malware";
+import { checkQuality } from "@/lib/check-quality";
 
 const createCreateHandler = () => {
   return async (req: FReq<CreateSchema>, res: FRes<CreateSchema>) => {
@@ -24,8 +25,9 @@ const createCreateHandler = () => {
       ExternalId: mindchunk.id,
     }]);
 
-    // run malware check after response; don't block or await
+    // run malware check and quality assessment after response; don't block or await
     void checkForMalware(mindchunk.id);
+    void checkQuality(mindchunk.id);
 
     return res.status(200).send({
       id: mindchunk.id,
