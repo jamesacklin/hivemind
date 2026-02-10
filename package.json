@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "@fastify/autoload": "6.0.2",
+    "@fastify/cors": "^11.2.0",
     "@fastify/static": "^9.0.0",
     "@fastify/type-provider-typebox": "5.0.1",
     "@sinclair/typebox": "0.33.22",

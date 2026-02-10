@@ -1,6 +1,7 @@
 import AutoLoad from "@fastify/autoload";
-import { FastifyInstance } from "fastify";
+import cors from "@fastify/cors";
 import staticPlugin from "@fastify/static";
+import { FastifyInstance } from "fastify";
 import path from "node:path";
 
 import config from "@/config";
@@ -10,6 +11,9 @@ import { agentTracker } from "@/middleware/agent-tracker.js";
 export default async function createServer(fastify: FastifyInstance) {
   // Initialize database
   getDatabase();
+
+  // allow cross-origin requests from any site (e.g. browser clients on other domains)
+  await fastify.register(cors, { origin: true });
 
   // Track agent activity
   fastify.addHook("onRequest", agentTracker);
